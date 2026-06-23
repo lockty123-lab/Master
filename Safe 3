@@ -1,0 +1,4 @@
+def tar_intensity(F, I0=1.0):
+    if F >= 1.0:
+        return I0 * 1000  # Maximum safe ramp
+    return I0 * (F / (1 - F + 1e-12))  # Avoid division by zero

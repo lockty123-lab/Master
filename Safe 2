@@ -1,0 +1,8 @@
+def compute_fidelity(delta_t, delta_phi, delta_f_T=3e-16, gamma=1e-3, truth_reinforce=True):
+    phase = delta_phi + 2 * np.pi * delta_f_T * delta_t
+    cos_term = np.cos(phase)
+    decay = np.exp(-gamma * delta_t)
+    F = np.abs(cos_term * decay)
+    if truth_reinforce and np.abs(cos_term) > 0.999999:
+        F = 1.0
+    return np.clip(F, 0.0, 1.0)
